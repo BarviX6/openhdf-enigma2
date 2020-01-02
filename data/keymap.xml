@@ -147,6 +147,8 @@
 		<key id="KEY_DOWN" mapto="switchChannelDown" flags="m" /-->
 		<key id="KEY_UP" mapto="switchChannelUpLong" flags="l" />
 		<key id="KEY_DOWN" mapto="switchChannelDownLong" flags="l" />
+		<!--key id="KEY_PREVIOUS" mapto="historyBack" flags="mr" />
+		<key id="KEY_NEXT" mapto="historyNext" flags="mr" />
 		<key id="KEY_BACK" mapto="historyBack" flags="mr" />
 		<key id="KEY_FORWARD" mapto="historyNext" flags="mr" /-->
 		<!--key id="KEY_ARCHIVE" mapto="historyBack" flags="mr" /-->
@@ -220,6 +222,7 @@
 		<key id="KEY_SPACE" mapto="mainMenu" flags="mr" />
 		<key id="KEY_SETUP" mapto="showSystemSetup" flags="mr" />
 		<!--key id="KEY_OPTION" mapto="showNetworkSetup" flags="mr" /-->
+		<!--key id="KEY_F1" mapto="showNetworkSetup" flags="mr" /-->
 		<!--key id="KEY_F5" mapto="showRFmod" flags="b" />
 		<key id="KEY_F5" mapto="toggleAspectRatio" flags="l" /-->
 	</map>
@@ -1019,22 +1022,6 @@
 		<key id="KEY_MOUSE" mapto="mouse_long" flags="l"/>
 		<key id="KEY_VOD" mapto="vod" flags="b"/>
 		<key id="KEY_VOD" mapto="vod_long" flags="l"/>
-		<key id="KEY_TVSAT" mapto="tvsat" flags="b"/>
-		<key id="KEY_TVSAT" mapto="tvsat_long" flags="l"/>
-		<key id="KEY_FIND" mapto="find" flags="b"/>
-		<key id="KEY_FIND" mapto="find_long" flags="l"/>
-		<key id="KEY_PLAYMODE" mapto="playmode" flags="b"/>
-		<key id="KEY_PLAYMODE" mapto="playmode_long" flags="l"/>
-		<key id="KEY_FILE" mapto="file" flags="b"/>
-		<key id="KEY_FILE" mapto="file_long" flags="l"/>
-		<key id="KEY_USB" mapto="usb" flags="b"/>
-		<key id="KEY_USB" mapto="usb_long" flags="l"/>
-		<key id="KEY_PORTAL" mapto="portal" flags="b"/>
-		<key id="KEY_PORTAL" mapto="portal_long" flags="l"/>
-		<key id="KEY_FAST" mapto="fast" flags="b"/>
-		<key id="KEY_FAST" mapto="fast_long" flags="l"/>
-		<key id="KEY_RECALL" mapto="recall" flags="b"/>
-		<key id="KEY_RECALL" mapto="recall_long" flags="l"/>
 	</map>
 
 	<map context="InfobarSeekActionsPTS">
