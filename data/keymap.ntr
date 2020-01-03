@@ -141,8 +141,6 @@
 		<key id="KEY_OK" mapto="openServiceList" flags="mr" />
 		<key id="KEY_PREVIOUS" mapto="historyBack" flags="mr" />
 		<key id="KEY_NEXT" mapto="historyNext" flags="mr" />
-		<key id="KEY_BACK" mapto="historyBack" flags="mr" />
-		<key id="KEY_FORWARD" mapto="historyNext" flags="mr" />
 		<key id="KEY_CHANNELUP" mapto="openServiceList" flags="mr" />
 		<key id="KEY_CHANNELDOWN" mapto="openServiceList" flags="mr" />
 		<key id="BTN_0" mapto="zapUp" flags="mr" />
@@ -919,8 +917,8 @@
 		<key id="KEY_SAT" mapto="sat_long" flags="l" />
 		<key id="KEY_VOLUMEUP" mapto="volumeUp" flags="mr" />
 		<key id="KEY_VOLUMEDOWN" mapto="volumeDown" flags="mr" />
-        <key id="KEY_DIRECTORY" mapto="directory" flags="b"/>
-        <key id="KEY_DIRECTORY" mapto="directory_long" flags="l"/>
+		 <key id="KEY_DIRECTORY" mapto="directory" flags="b"/>
+		<key id="KEY_DIRECTORY" mapto="directory_long" flags="l"/>
 		<key id="KEY_ARCHIVE" mapto="historyBack" flags="b" />
 		<key id="KEY_ARCHIVE" mapto="historyBack" flags="l" />
 		<key id="KEY_EJECTCD" mapto="ejectcd" flags="b"/>
@@ -929,6 +927,18 @@
 		<key id="KEY_MOUSE" mapto="mouse_long" flags="l"/>
 		<key id="KEY_VOD" mapto="vod" flags="b"/>
 		<key id="KEY_VOD" mapto="vod_long" flags="l"/>
+		<key id="KEY_TVSAT" mapto="tvsat" flags="m"/>
+		<key id="KEY_PICASA" mapto="picasa" flags="m"/>
+		<key id="KEY_SHOUTCAST" mapto="shoutcast" flags="m"/>
+		<key id="KEY_YOUTUBE" mapto="youtube" flags="m"/>
+		<key id="KEY_SPARK" mapto="spark" flags="m"/>
+		<key id="KEY_FIND" mapto="find" flags="m"/>
+		<key id="KEY_PLAYMODE" mapto="playmode" flags="m"/>
+		<key id="KEY_USB" mapto="usb" flags="m"/>
+		<key id="KEY_PORTAL" mapto="portal" flags="b"/>
+		<key id="KEY_PORTAL" mapto="portal_long" flags="l"/>
+		<key id="KEY_FAST" mapto="fast" flags="m"/>
+		<key id="KEY_RECALL" mapto="recall" flags="m"/>
 	</map>
 
 	<map context="SubtitlesActions">

@@ -1022,6 +1022,18 @@
 		<key id="KEY_MOUSE" mapto="mouse_long" flags="l"/>
 		<key id="KEY_VOD" mapto="vod" flags="b"/>
 		<key id="KEY_VOD" mapto="vod_long" flags="l"/>
+		<key id="KEY_TVSAT" mapto="tvsat" flags="m"/>
+		<key id="KEY_PICASA" mapto="picasa" flags="m"/>
+		<key id="KEY_SHOUTCAST" mapto="shoutcast" flags="m"/>
+		<key id="KEY_YOUTUBE" mapto="youtube" flags="m"/>
+		<key id="KEY_SPARK" mapto="spark" flags="m"/>
+		<key id="KEY_FIND" mapto="find" flags="m"/>
+		<key id="KEY_PLAYMODE" mapto="playmode" flags="m"/>
+		<key id="KEY_USB" mapto="usb" flags="m"/>
+		<key id="KEY_PORTAL" mapto="portal" flags="b"/>
+		<key id="KEY_PORTAL" mapto="portal_long" flags="l"/>
+		<key id="KEY_FAST" mapto="fast" flags="m"/>
+		<key id="KEY_RECALL" mapto="recall" flags="m"/>
 	</map>
 
 	<map context="InfobarSeekActionsPTS">
