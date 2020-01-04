@@ -4,8 +4,8 @@ from enigma import ePixmap, ePicLoad
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_ACTIVE_SKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
-from Components.config import config, ConfigBoolean
 from ServiceReference import ServiceReference
+from Components.config import config, ConfigBoolean
 
 searchPaths = []
 lastPiconPath = None
@@ -60,7 +60,7 @@ def findPicon(serviceName):
 		global searchPaths
 		pngname = ""
 		for path in searchPaths:
-			if pathExists(path) and not path.startswith('/media/net') and not path.startswith('/media/autofs'):
+			if pathExists(path) and not path.startswith('/media/net'):
 				pngname = path + serviceName + ".png"
 				if pathExists(pngname):
 					lastPiconPath = path
@@ -76,8 +76,23 @@ def findPicon(serviceName):
 			return ""
 
 def getPiconName(serviceName):
-	sname = '_'.join(GetWithAlternative(serviceName).split(':', 10)[:10])
-	pngname = findPicon(sname)
+	#remove the path and name fields, and replace ':' by '_'
+	fields = GetWithAlternative(serviceName).split(':', 10)[:10]
+	if not fields or len(fields) < 10:
+		return ""
+	pngname = findPicon('_'.join(fields))
+	if not pngname and not fields[6].endswith("0000"):
+		#remove "sub-network" from namespace
+		fields[6] = fields[6][:-4] + "0000"
+		pngname = findPicon('_'.join(fields))
+	if not pngname and fields[0] != '1':
+		#fallback to 1 for other reftypes
+		fields[0] = '1'
+		pngname = findPicon('_'.join(fields))
+	if not pngname and fields[2] != '1':
+		#fallback to 1 for services with different service types
+		fields[2] = '1'
+		pngname = findPicon('_'.join(fields))
 	if not pngname: # picon by channel name
 		name = ServiceReference(serviceName).getServiceName()
 		name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
@@ -86,26 +101,6 @@ def getPiconName(serviceName):
 			pngname = findPicon(name)
 			if not pngname and len(name) > 2 and name.endswith('hd'):
 				pngname = findPicon(name[:-2])
-	if not pngname:
-		fields = sname.split('_', 3)
-		if len(fields) > 0 and fields[0] != '1':
-			fields[0] = '1'
-		pngname = findPicon('_'.join(fields))
-		if len(fields) > 2:
-			while not pngname:
-				tmp = ''
-				for i in range(256):
-					tmp = hex(i)[2:].upper().zfill(2)
-					fields[2] = tmp
-					pngname = findPicon('_'.join(fields))
-					if pngname:
-						newpng = '/usr/share/enigma2/picon/' + name + '.png'
-						try:
-							os.symlink(pngname, newpng)
-						except:
-							pass
-						break
-				if tmp == "FF": break
 	return pngname
 
 class Picon(Renderer):
@@ -176,6 +171,9 @@ class Picon(Renderer):
 					else:
 						self.instance.hide()
 					self.pngname = pngname
+			elif what[0] == 2:
+				self.pngname = ""
+				self.instance.hide()
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 initPiconPaths()
