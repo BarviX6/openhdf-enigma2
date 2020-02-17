@@ -8,7 +8,6 @@ from enigma import eDBoxLCD, eTimer, eActionMap
 from config import config, ConfigSubsection, ConfigSelection, ConfigSlider, ConfigYesNo, ConfigNothing
 from Components.SystemInfo import SystemInfo
 from Tools.Directories import fileExists
-from Screens.InfoBar import InfoBar
 from Screens.Screen import Screen
 import Screens.Standby
 import usb
@@ -184,7 +183,7 @@ class LCD:
 
 	def setFlipped(self, value):
 		eDBoxLCD.getInstance().setFlipped(value)
-
+		
 	def setScreenShot(self, value):
  		eDBoxLCD.getInstance().setDump(value)
 
@@ -304,7 +303,7 @@ def standbyCounterChanged(configElement):
 	config.lcd.ledbrightnessdeepstandby.apply()
 
 def InitLcd():
-	if getBoxType() in ('gbx34k','force4','alien5','viperslim','lunix','lunix4k','purehdse','vipert2c','evoslimse','evoslimt2c','valalinux','tmtwin4k','tmnanom3','mbmicrov2','revo4k','force3uhd','force2nano','evoslim','wetekplay', 'wetekplay2', 'wetekhub', 'ultrabox', 'novaip', 'dm520', 'dm525', 'purehd', 'mutant11', 'xpeedlxpro', 'zgemmai55', 'sf98', 'et7x00mini', 'xpeedlxcs2', 'xpeedlxcc', 'e4hd', 'e4hdhybrid', 'mbmicro', 'beyonwizt2', 'amikomini', 'dynaspark', 'amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'arguspinguluxplus', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'gb800se', 'gb800solo', 'gb800seplus', 'gbultrase', 'gbipbox', 'tmsingle', 'tmnano2super', 'iqonios300hd', 'iqonios300hdv2', 'optimussos1plus', 'optimussos1', 'vusolo', 'et4x00', 'et5x00', 'et6x00', 'et7000', 'et7100', 'et7x00mini', 'mixosf7', 'mixoslumi', 'gbx1', 'gbx2', 'gbx3', 'gbx3h'):
+	if getBoxType() in ('gbx34k','force4','alien5','viperslim','lunix','lunix4k','purehdse','vipert2c','evoslimse','evoslimt2c','valalinux','tmtwin4k','tmnanom3','mbmicrov2','revo4k','force3uhd','force2nano','evoslim','wetekplay', 'wetekplay2', 'wetekhub', 'ultrabox', 'novaip', 'dm520', 'dm525', 'purehd', 'mutant11', 'xpeedlxpro', 'zgemmai55', 'sf98', 'et7x00mini', 'xpeedlxcs2', 'xpeedlxcc', 'e4hd', 'e4hdhybrid', 'mbmicro', 'beyonwizt2', 'amikomini', 'dynaspark', 'amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'arguspinguluxplus', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'gb800se', 'gb800solo', 'gb800seplus', 'gbultrase', 'gbipbox', 'tmsingle', 'tmnano2super', 'iqonios300hd', 'iqonios300hdv2', 'optimussos1plus', 'optimussos1', 'vusolo', 'et4x00', 'et5x00', 'et6x00', 'et7000', 'et7100', 'mixosf7', 'mixoslumi', 'gbx1', 'gbx2', 'gbx3', 'gbx3h'):
 		detected = False
 	else:
 		detected = eDBoxLCD.getInstance().detected()
@@ -352,7 +351,6 @@ def InitLcd():
 				config.lcd.modepip.addNotifier(setLCDModePiP)
 			else:
 				config.lcd.modepip = ConfigNothing()
-
 			config.lcd.screenshot = ConfigYesNo(default=False)
  			config.lcd.screenshot.addNotifier(setLCDScreenshot)
 
@@ -529,71 +527,11 @@ def InitLcd():
 		config.usage.lcd_power4x7on = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
 		config.usage.lcd_power4x7on.addNotifier(setPower4x7On)
 
-		config.usage.lcd_power4x7standby = ConfigSelection(default = "off", choices = [("off", _("Off")), ("on", _("On"))])
+		config.usage.lcd_power4x7standby = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
 		config.usage.lcd_power4x7standby.addNotifier(setPower4x7Standby)
 
-		config.usage.lcd_power4x7suspend = ConfigSelection(default = "off", choices = [("off", _("Off")), ("on", _("On"))])
+		config.usage.lcd_power4x7suspend = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
 		config.usage.lcd_power4x7suspend.addNotifier(setPower4x7Suspend)
-
-		def setDateOnStandby(configElement):
-			pass
-
-		def setDateFormat(configElement):
-			pass
-
-		from datetime import datetime
-		ntime=datetime.now()
-		# 8 digit
-		if getBoxType() in ('formuler1', 'osminiplus'):
-			config.usage.lcd_dateformat = ConfigSelection(default="%H:%M", choices = [
-				("OFF","Off"),
-				("%H:%M",str(ntime.strftime(_("%H:%M")))),
-				("A%H:%M %d/%m",str(ntime.strftime(_("%H:%M <A> %d/%m")))),
-				("A%H:%M %d/%m/%y",str(ntime.strftime(_("%H:%M <A> %d/%m/%y")))),
-				("A%H:%M %d %b",str(ntime.strftime(_("%H:%M <A> %d %b")))),
-				("A%H:%M %a %d",str(ntime.strftime(_("%H:%M <A> %a %d"))))])
-			config.usage.lcd_dateformat.addNotifier(setDateFormat)
-		#12 digit
-		elif getBoxType() in ('vusolo2', 'osmega'):
-			config.usage.lcd_dateformat = ConfigSelection(default="%H:%M %d/%m", choices = [
-				("OFF","Off"),
-				("%H:%M",str(ntime.strftime(_("%H:%M")))),
-				("%H:%M %d/%m",str(ntime.strftime(_("%H:%M %d/%m")))),
-				("%H:%M %d %b",str(ntime.strftime(_("%H:%M %d %b")))),
-				("%H:%M %a %d",str(ntime.strftime(_("%H:%M %a %d")))),
-				("A%H:%M %d/%m",str(ntime.strftime(_("%H:%M <A> %d/%m")))),
-				("A%H:%M %d/%m/%y",str(ntime.strftime(_("%H:%M <A> %d/%m/%y")))),
-				("A%H:%M %d/%m/%Y",str(ntime.strftime(_("%H:%M <A> %d/%m/%Y")))), 
-				("A%H:%M %d %b",str(ntime.strftime(_("%H:%M <A> %d %b")))),
-				("A%H:%M %d %b %y",str(ntime.strftime(_("%H:%M <A> %d %b %y")))),
-				("A%H:%M %a %d",str(ntime.strftime(_("%H:%M <A> %a %d")))),
-				("A%H:%M %a %d/%m",str(ntime.strftime(_("%H:%M <A> %a %d/%m")))),
-				("A%H:%M %a %d/%m/%y",str(ntime.strftime(_("%H:%M <A> %a %d/%m/%y"))))])
-			config.usage.lcd_dateformat.addNotifier(setDateFormat)
-		#16 digit
-		elif getBoxType() in ('sf3038', 'sf4008','mutant51'):
-			config.usage.lcd_dateformat = ConfigSelection(default="%H:%M %d/%m/%Y", choices = [
-				("OFF","Off"),
-				("%H:%M",str(ntime.strftime(_("%H:%M")))),
-				("%H:%M %d/%m",str(ntime.strftime(_("%H:%M %d/%m")))),
-				("%H:%M %d/%m/%y",str(ntime.strftime(_("%H:%M %d/%m/%y")))),
-				("%H:%M %d/%m/%Y",str(ntime.strftime(_("%H:%M %d/%m/%Y")))), 
-				("%H:%M %d %b",str(ntime.strftime(_("%H:%M %d %b")))),
-				("%H:%M %d %b %y",str(ntime.strftime(_("%H:%M %d %b %y")))),
-				("%H:%M %a %d",str(ntime.strftime(_("%H:%M %a %d")))),
-				("%H:%M %a %d/%m",str(ntime.strftime(_("%H:%M %a %d/%m")))),
-				("A%H:%M %d/%m",str(ntime.strftime(_("%H:%M <A> %d/%m")))),
-				("A%H:%M %d/%m/%y",str(ntime.strftime(_("%H:%M <A> %d/%m/%y")))),
-				("A%H:%M %d/%m/%Y",str(ntime.strftime(_("%H:%M <A> %d/%m/%Y")))), 
-				("A%H:%M %d %b",str(ntime.strftime(_("%H:%M <A> %d %b")))),
-				("A%H:%M %d %b %y",str(ntime.strftime(_("%H:%M <A> %d %b %y")))),
-				("A%H:%M %a %d",str(ntime.strftime(_("%H:%M <A> %a %d")))),
-				("A%H:%M %a %d/%m",str(ntime.strftime(_("%H:%M <A> %a %d/%m")))),
-				("A%H:%M %a %d/%m/%y",str(ntime.strftime(_("%H:%M <A> %a %d/%m/%y")))),
-				("A%H:%M %a %d/%m/%Y",str(ntime.strftime(_("%H:%M <A> %a %d/%m/%Y"))))])
-			config.usage.lcd_dateformat.addNotifier(setDateFormat)
-		else:
-			config.usage.lcd_dateformat = ConfigNothing()
 
 		if getBoxType() in ('dm900', 'dm920', 'e4hdultra', 'protek4k'):
 			standby_default = 4
@@ -608,14 +546,10 @@ def InitLcd():
 		else:
 			config.lcd.contrast = ConfigNothing()
 
-		if getBoxType() in ('novatwin', 'novacombo', 'mixosf5', 'mixosf5mini', 'gi9196m', 'gi9196lite', 'zgemmas2s', 'zgemmash1', 'zgemmash2', 'zgemmass', 'marvel1', 'enfinity', 'spycat'):
+		if getBoxType() in ('novatwin', 'novacombo', 'mixosf5', 'mixosf5mini', 'gi9196m', 'gi9196lite', 'zgemmas2s', 'zgemmash1', 'zgemmash2', 'zgemmass', 'zgemmahs', 'zgemmah2s', 'zgemmah2h', 'spycat'):
 			config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 4))
 			config.lcd.dimbright = ConfigSlider(default=standby_default, limits=(0, 4))
 			config.lcd.bright = ConfigSlider(default=4, limits=(0, 4))
-		elif getBoxType() in ('zgemmahs', 'zgemmah2s', 'zgemmah2h', 'zgemmaslc'):
-			config.lcd.standby = ConfigSlider(default=2, limits=(0, 8))
-			config.lcd.dimbright = ConfigSlider(default=5, limits=(0, 8))
-			config.lcd.bright = ConfigSlider(default=5, limits=(0, 8))
 		elif getBoxType() in ('spycat4kmini', 'osmega'):
 			config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 10))
 			config.lcd.dimbright = ConfigSlider(default=standby_default, limits=(0, 10))
@@ -652,6 +586,7 @@ def InitLcd():
 		if SystemInfo["LcdLiveTV"]:
 			def lcdLiveTvChanged(configElement):
 				open(SystemInfo["LcdLiveTV"], "w").write(configElement.value and "0" or "1")
+				from Screens.InfoBar import InfoBar
 				InfoBarInstance = InfoBar.instance
 				InfoBarInstance and InfoBarInstance.session.open(dummyScreen)
 			config.lcd.showTv = ConfigYesNo(default = False)
@@ -809,25 +744,3 @@ def InitLcd():
 		config.lcd.ledblinkingtime = ConfigNothing()
 
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
-
-def setLCDLiveTv(value):
-	if "live_enable" in SystemInfo["LcdLiveTV"]:
-		open(SystemInfo["LcdLiveTV"], "w").write(value and "enable" or "disable")
-	else:
-		open(SystemInfo["LcdLiveTV"], "w").write(value and "0" or "1")
-	if not value:
-		try:
-			InfoBarInstance = InfoBar.instance
-			InfoBarInstance and InfoBarInstance.session.open(dummyScreen)
-		except:
-			pass
-
-def leaveStandbyLCDLiveTV():
-	if config.lcd.showTv.value:
-		setLCDLiveTv(True)
-
-def standbyCounterChangedLCDLiveTV(dummy):
-	if config.lcd.showTv.value:
-		if leaveStandbyLCDLiveTV not in Screens.Standby.inStandby.onClose:
-			Screens.Standby.inStandby.onClose.append(leaveStandbyLCDLiveTV)
-		setLCDLiveTv(False)
