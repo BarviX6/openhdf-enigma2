@@ -103,6 +103,7 @@ class Standby2(Screen):
 		#restart last played service
 		#unmute adc
 		self.leaveMute()
+		Console().ePopen("/bin/vdstandby -d &")
 		# set LCDminiTV
 		if SystemInfo["Display"] and SystemInfo["LCDMiniTV"]:
 			setLCDModeMinitTV(config.lcd.modeminitv.value)
@@ -210,6 +211,8 @@ class Standby2(Screen):
 			self.avswitch.setInput("SCART")
 		else:
 			self.avswitch.setInput("AUX")
+
+		Console().ePopen("/bin/vdstandby -a &")
 
 		if (getBrandOEM() in ('fulan','clap','dinobot') or getBoxType() in ('sf8008','sf8008s','sf8008t','ustym4kpro')):
 			try:
