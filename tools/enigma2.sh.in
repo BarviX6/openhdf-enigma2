@@ -12,7 +12,7 @@ fi
 
 if [ -e /proc/stb/info/boxtype ]; then
 	stbcheck=`cat /proc/stb/info/boxtype`
-	if [ $stbcheck == "sf8008" ] || [ $stbcheck == "ustym4kpro" ] || [ $stbcheck == "cc1" ]; then
+	if [ $stbcheck == "sf8008" ] || [ $stbcheck == "ustym4kpro" ] || [ $stbcheck == "cc1" ] || [ $stbcheck == "trio4k" ] || [ $stbcheck == "gbmv200" ]; then
 		count=`ps -ef |grep libreader |grep -v "grep" |wc -l`
 		if [ 0 == $count ];then
 			libreader 720P_50
@@ -92,6 +92,7 @@ if [ -x @bindir@/showiframe ]; then
 fi
 
 # hook to execute scripts always before enigma2 start
+[ -f @bindir@/enigma2_pre_start.sh ] || echo "#!/bin/sh" > @bindir@/enigma2_pre_start.sh && chmod -R 755 @bindir@/enigma2_pre_start.sh
 [ -x @bindir@/enigma2_pre_start.sh ] && @bindir@/enigma2_pre_start.sh
 [ -x @bindir@/enigma2_pre_start_ciplus.sh ] && @bindir@/enigma2_pre_start_ciplus.sh
 
@@ -149,7 +150,7 @@ if [ "$ret" -ne "1" ]; then
 			killall -9 showiframe; sleep 5
 		fi
 		stbcheck=`cat /proc/stb/info/boxtype`
-		if [ $stbcheck == "sf8008" ] || [ $stbcheck == "ustym4kpro" ] || [ $stbcheck == "cc1" ] ; then
+		if [ $stbcheck == "sf8008" ] || [ $stbcheck == "ustym4kpro" ] || [ $stbcheck == "cc1" ] || [ $stbcheck == "trio4k" ] || [ $stbcheck == "gbmv200" ]; then
 			killall -9 libreader; sleep 5
 		fi
 	fi
