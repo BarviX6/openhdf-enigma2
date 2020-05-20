@@ -19,6 +19,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 
 from Tools.StbHardware import getFPVersion
+from Tools.Directories import fileCheck
 
 import os
 import re
@@ -248,6 +249,13 @@ class About(Screen):
 		AboutText += _("HDF Version:\tV%s") % getImageVersion() + " Build #" + getImageBuild() + " based on " + getOEVersion() + "\n"
 		AboutText += _("Kernel (Box):\t%s") % about.getKernelVersionString() + " (" + getBoxType() + ")" + "\n"
 
+		if path.isfile("/etc/issue"):
+			version = open("/etc/issue").readlines()[-2].upper().strip()[:-6]
+			if path.isfile("/etc/image-version"):
+				build = self.searchString("/etc/image-version", "^build=")
+				version = "%s #%s" % (version,build)
+			AboutText += _("Image:\t%s") % version + "\n"
+
 		imagestarted = ""
 		bootname = ''
 		if path.exists('/boot/bootname'):
@@ -286,12 +294,13 @@ class About(Screen):
 				if bootname: bootname = "   (%s)" %bootname
 				AboutText += _("Partition:\t%s") % "STARTUP_" + image + bootname + "\n"
 
-		if path.isfile("/etc/issue"):
-			version = open("/etc/issue").readlines()[-2].upper().strip()[:-6]
-			if path.isfile("/etc/image-version"):
-				build = self.searchString("/etc/image-version", "^build=")
-				version = "%s #%s" % (version,build)
-			AboutText += _("Image:\t%s") % version + "\n"
+		if SystemInfo["HaveMultiBoot"]:
+			MyFlashDate = about.getFlashDateString()
+			if path.isfile("/etc/filesystems"):
+				AboutText += _("Flashed:\t%s") % MyFlashDate + "\n"
+				#AboutText += _("Flashed:\tMultiboot active\n")
+		else:
+			AboutText += _("Flashed:\t%s\n") % about.getFlashDateString()
 
 		string = getDriverDate()
 		year = string[0:4]
@@ -304,20 +313,16 @@ class About(Screen):
 		AboutText += _("Drivers:\t%s") % driversdate + "\n"
 		AboutText += _("GStreamer:\t%s") % about.getGStreamerVersionString() + "\n"
 		AboutText += _("Python:\t%s\n") % about.getPythonVersionString()
-		if path.exists('/boot/STARTUP'):
-			#if getMachineBuild() in ('cc1','sf8008','sf8008s','sf8008t'):
-			#	os.system("tune2fs -l /dev/sda2 | grep 'Filesystem created:' | cut -d ' ' -f 9-13 > /tmp/flashdate" )
-			#else:
-			#	os.system("tune2fs -l /dev/sda1 | grep 'Filesystem created:' | cut -d ' ' -f 9-13 > /tmp/flashdate" )
-			#flashdate = open('/tmp/flashdate', 'r').read()
-			#AboutText += _("Flashed:\t%s") % flashdate
-			AboutText += _("Flashed:\tMultiboot active\n")
-		else:
-			AboutText += _("Flashed:\t%s\n") % about.getFlashDateString()
 		AboutText += _("Free Flash:\t%s\n") % freeflash()
 		AboutText += _("Skin:\t%s (%s x %s)\n") % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 		AboutText += _("Last update:\t%s") % getEnigmaVersionString() + " to Build #" + getImageBuild() + "\n"
 		AboutText += _("E2 (re)starts:\t%s\n") % config.misc.startCounter.value
+		if SystemInfo["WakeOnLAN"]:
+			if fileCheck("/proc/stb/power/wol"):
+				WOLmode = open("/proc/stb/power/wol").read()[:-1]
+			if fileCheck("/proc/stb/fp/wol"):
+				WOLmode = open("/proc/stb/fp/wol").read()[:-1]
+			AboutText += _("WakeOnLAN:\t%s\n") % WOLmode
 		AboutText += _("Network:")
 		eth0 = about.getIfConfig('eth0')
 		eth1 = about.getIfConfig('eth1')
@@ -505,11 +510,11 @@ class SystemMemoryInfo(Screen):
 		self.skinName = ["SystemMemoryInfo", "About"]
 		self["lab1"] = StaticText(_("OpenHDF"))
 		self["AboutScrollLabel"] = ScrollLabel()
-
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
+				"blue": self.showMemoryInfo,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown,
 			})
@@ -571,6 +576,9 @@ class SystemMemoryInfo(Screen):
 
 	def createSummary(self):
 		return AboutSummary
+
+	def showMemoryInfo(self):
+		self.session.open(MemoryInfo)
 
 class SystemNetworkInfo(Screen):
 	def __init__(self, session):

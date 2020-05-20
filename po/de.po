@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-19 23:44+0100\n"
-"PO-Revision-Date: 2020-03-22 10:35+0100\n"
+"PO-Revision-Date: 2020-05-10 06:10+0200\n"
 "Last-Translator: Koivo <koivo@hdfreaks.cc>\n"
 "Language-Team: openHDF\n"
 "Language: de\n"
@@ -575,7 +575,7 @@ msgid ""
 "Flash on the fly your %s %s."
 msgstr ""
 "\n"
-"Flashen   Online / Local Ihrer %s %s."
+"Flashen - Online/Local der %s %s."
 
 msgid ""
 "\n"
@@ -595,6 +595,53 @@ msgstr "Image zum Flashen auswählen"
 
 msgid "Flash On the Fly"
 msgstr "Flashen   Online / Local"
+
+msgid "Save settings and EPG data"
+msgstr "Einstellungen und EPG-Daten speichern"
+
+msgid ""
+"Do you want to flash image\n"
+"%s"
+msgstr ""
+"Möchten Sie das folgende Image flashen?\n"
+"%s"
+
+msgid "slot%s - %s (current image)"
+msgstr "Startup %s - %s (aktuelles Image)"
+
+msgid "slot%s - %s (current)"
+msgstr "Startup %s - %s (aktuell)"
+
+msgid "slot%s - %s"
+msgstr "Startup %s - %s"
+
+msgid "Empty slot"
+msgstr "Leeres Startup"
+
+msgid "(current image)"
+msgstr "(aktuelles Image)"
+
+msgid "Slot %s: %s%s"
+msgstr "Startup %s: %s%s"
+
+msgid "Slot %s: %s - Mode %d%s"
+msgstr "Startup %s: %s - Mode %d%s"
+
+msgid "No, do not flash an image"
+msgstr "Nein, kein Image flashen"
+
+msgid "Unzipping Image"
+msgstr "Entpacke Image"
+
+msgid "Please wait"
+msgstr "Bitte warten"
+
+msgid ""
+"%s\n"
+"Press ok to close"
+msgstr ""
+"%s\n"
+"OK drücken zum Beenden"
 
 msgid "Please select what to do after first booting the image:\n"
 msgstr "Bitte auswählen was nach dem ersten Starten erledigt werden soll:\n"
@@ -4103,11 +4150,38 @@ msgstr "Power LED Anzeige im Deep-Standby"
 msgid "Power LED state during standby."
 msgstr "Power LED Anzeige im Standby"
 
+msgid "Power LED State when Running."
+msgstr "Power LED Anzeige im Betrieb"
+
+msgid "Power LED State in Standby"
+msgstr "Power LED Anzeige im Standby"
+
+msgid "PowerControl FrontDisplay Normal Mode"
+msgstr "Power Control Front Display im Betrieb"
+
+msgid "PowerControl FrontDisplay Standby Mode"
+msgstr "Power Control Front Display im Standby"
+
+msgid "PowerControl FrontDisplay Suspend Mode"
+msgstr "Power Control Front Display im Deep-Standby"
+
+msgid "This option allows you to Power Off the display."
+msgstr "Mit dieser Option kann das Display an oder ausgeschaltet werden."
+
+msgid "Set LED Color or disable the LED."
+msgstr "Setzen oder deaktivieren der Power LED Farbe"
+
 msgid "Turn on the power LED."
 msgstr "Power-LED Mode"
 
+msgid "Turn on the control LED."
+msgstr "Control-LED Mode"
+
 msgid "Power LED can be turned on or off here."
-msgstr "Power-LED kann hier an oder ausgeschaltet werden.."
+msgstr "Power-LED kann hier an oder ausgeschaltet werden."
+
+msgid "Control LED can be turned on or off here."
+msgstr "Control-LED kann hier an oder ausgeschaltet werden."
 
 msgid "Power LED state during deep-standby."
 msgstr "Hier können Sie einstellen, ob die Power-LED im Deep-Standby an oder aus sein soll."
@@ -8105,6 +8179,28 @@ msgstr "Trotzdem neu booten?"
 msgid "Really reflash your %s %s and reboot now?"
 msgstr "Die %s %s wirklich flashen und neu starten?"
 
+msgid "Flashing image successful"
+msgstr "Flashen vom Image war erfolgreich"
+
+msgid ""
+"Flashing image successful.\n"
+"Press ok to close.\n"
+"\n"
+"Flashed:\n"
+"%s"
+msgstr ""
+"Flashen vom Image war erfolgreich.\n"
+"Ok drücken zum Beenden.\n"
+"\n"
+"Geflasht wurde:\n"
+"%s"
+
+msgid "Retrieving image list - Please wait..."
+msgstr "Image-Liste abrufen. Bitte warten..."
+
+msgid "Retrieving image slots - Please wait..."
+msgstr "Image-Slots abrufen. Bitte warten..."
+
 msgid "Really restart now?"
 msgstr "Trotzdem neu starten?"
 
@@ -9246,16 +9342,16 @@ msgid "Show blinking rec symbol on Display during recording"
 msgstr "Zeige REC im Display bei Aufnahmen oder Auswahl"
 
 msgid "Blinking REC Symbol"
-msgstr "Blinkendes REC-Zeichen"
+msgstr "Blinkendes REC"
 
 msgid "REC Symbol"
-msgstr "REC-Zeichen"
+msgstr "REC"
 
 msgid "Show blinking Clock in Standby on Display during recording"
 msgstr "Zeige REC im Display bei Aufnahmen oder Auswahl im Standby"
 
 msgid "In the Standby blinking Clock on the LCD Display"
-msgstr "Im Standby blinkende Uhr im LCD-Display"
+msgstr "Aktiviert das blinkendes REC Symbol bei aktiven Aufnahmen im Standby"
 
 msgid "Show HDMI-Output Res"
 msgstr "Zeige HDMI Ausgangsauflösung"
@@ -14686,6 +14782,52 @@ msgstr "Der Ausschalt-Timer wurde deaktiviert."
 msgid "Do you want to backup your image and settings before?"
 msgstr "Soll vorher ein Backup vom Image oder den Settings gemacht werden?"
 
+msgid "Do you want to backup your settings now?"
+msgstr "Sollen jetzt die Einstellungen gesichert werden?"
+
+msgid "Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficient free space and try again!"
+msgstr "Es konnte kein geeignetes Medium gefunden werden. Bitte entfernen Sie einige heruntergeladene Images oder legen Sie ein Medium (z.B. USB-Stick) mit ausreichend freiem Speicherplatz ein und versuchen Sie es erneut."
+
+msgid ""
+"Recording(s) are in progress or coming up in few seconds!\n"
+"Entering standby, after recording the box will shutdown."
+msgstr ""
+"Zurzeit ist eine/sind Aufnahmen aktiv oder starten gleich!\n"
+"Der Receiver wird jetzt in den Standby versetzt und am Ende der Aufnahme(n) heruntergefahren."
+
+msgid "Downloading Image ... Please wait"
+msgstr "Download Image ... Bitte warten"
+
+msgid ""
+"Error during downloading image\n"
+"%s\n"
+"%s"
+msgstr ""
+"Fehler beim Herunterladen vom Image\n"
+"%s\n"
+"%s"
+
+msgid ""
+"Error during unzipping image\n"
+"%s"
+msgstr ""
+"Fehler beim Entpacken vom Image\n"
+"%s"
+
+msgid ""
+"Image to install is invalid\n"
+"%s"
+msgstr ""
+"Image zum Installieren ist fehlerhaft\n"
+"%s"
+
+msgid ""
+"Flashing image was not successful\n"
+"%s"
+msgstr ""
+"Flashen vom Image war nicht erfolgreich\n"
+"%s"
+
 msgid "Backup your settings now?"
 msgstr "Sollen jetzt die Einstellungen gesichert werden?"
 
@@ -14761,6 +14903,16 @@ msgstr "Multiboot Auswahl"
 msgid "Select Multiboot"
 msgstr "Multiboot Auswahl"
 
+msgid "Current Startup"
+msgstr "Aktuelles Startup"
+
+msgid ""
+"You can switch between the startups with yellow button.\n"
+"If no selection is made, the current startup is automatically taken."
+msgstr ""
+"Mit der gelben Taste kann zwischen den Startups gewechselt werden.\n"
+"Ohne Auswahl wird automatisch das aktuelle Startup genommen."
+
 msgid "MultiBoot Selector"
 msgstr "MultiBoot Auswahl"
 
@@ -14800,9 +14952,6 @@ msgstr "Multiboot-Manager - Die SD-Karte muss mindestens 8 MB groß sein."
 msgid "Multiboot manager - SDcard initialization run, please restart Image."
 msgstr "Multiboot-Manager - Initialisierung der SD-Karte. Bitte starten Sie die Box neu."
 
-msgid "Retrieving image list - Please wait..."
-msgstr "Image-Liste abrufen - Bitte warten Sie ..."
-
 msgid "Cannot find images - please try later"
 msgstr "Images können nicht gefunden werden. Versuchen Sie es später noch einmal"
 
@@ -14820,6 +14969,12 @@ msgstr "Multiboot Fehler! - kein %s in boot partition."
 
 msgid "No images found"
 msgstr "Keine Images gefunden"
+
+msgid "Downloaded Images"
+msgstr "Heruntergeladene Images"
+
+msgid "Do not flash image"
+msgstr "Jetzt kein Image flashen"
 
 msgid "MultiBoot image manager"
 msgstr "MultiBoot Image Manager"
@@ -15055,3 +15210,40 @@ msgstr "Aktiviere %s pro:"
 
 msgid "Style:"
 msgstr "Farbe:"
+
+msgid "Pixels\n"
+msgstr "Pixel\n"
+
+msgid ""
+"Can be used to test defect pixels on TV screen.\n"
+"\n"
+"Available color test screens:\n"
+"\n"
+"red\n"
+"green\n"
+"blue\n"
+"white\n"
+"black\n"
+"cyan\n"
+"magenta\n"
+"yellow\n"
+"\n"
+"Screens change with left/right buttons or use red, green, blue to toggle.\n"
+"Yellow for returning back to this intro"
+msgstr ""
+"Kann verwendet werden um auf defekte Pixel am TV zu testen.\n"
+"\n"
+"Verfügbare Farb-Test-Bildschirme:\n"
+"\n"
+"Rot\n"
+"Grün\n"
+"Blau\n"
+"Weiß\n"
+"Schwarz\n"
+"Cyan\n"
+"Magenta\n"
+"Gelb\n"
+"\n"
+"Bildschirm wechseln mit Tasten LINKS/RECHTS oder mit den\n"
+"Tasten ROT, GRÜN und BLAU direkt umschalten.\n"
+"Mit Taste GELB zurück zur Einführung."
