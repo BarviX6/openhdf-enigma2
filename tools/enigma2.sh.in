@@ -4,6 +4,9 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 datarootdir=@datarootdir@
 
+# write HDF on vfd display
+echo "HDF" > /dev/vfd
+
 # workaround for corrupt ssl files
 if ! grep ^config.misc.firstrun=false /etc/enigma2/settings >/dev/null; then
 	rm -rf /etc/enigma2/cert.pem &
