@@ -313,6 +313,7 @@ class About(Screen):
 		#return (gstcmd2)
 		AboutText += _("Drivers:\t%s") % driversdate + "\n"
 		AboutText += _("GStreamer:\t%s") % about.getGStreamerVersionString() + "\n"
+		AboutText += _("FFmpeg:\t\t%s") % about.getFFmpegVersionString() + "\n"
 		AboutText += _("Python:\t%s\n") % about.getPythonVersionString()
 		AboutText += _("Free Flash:\t%s\n") % freeflash()
 		AboutText += _("Skin:\t%s (%s x %s)\n") % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
