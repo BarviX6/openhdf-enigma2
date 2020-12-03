@@ -1,9 +1,9 @@
 import errno
-import time
 import xml.etree.cElementTree
 
 from enigma import eTimer  # This is for AutoTimers!
 from os import environ, path, symlink, unlink, walk
+from time import gmtime, localtime, strftime, time
 
 from Components.config import ConfigSelection, ConfigSubsection, config
 from Tools.Geolocation import geolocation
